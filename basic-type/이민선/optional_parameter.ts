@@ -6,11 +6,13 @@
 
   function githubRepository(name: string, description?: string): Repository {
     //description이 있을 경우와 없을 경우를 각각 if문으로 나눠야 한다.
+    // description이 인자로 전달 되었을 떄
     if (description) {
       return {
         name,
         description,
       };
+      // description이 인자로 전달 되지 않았을 떄
     } else {
       return {
         name,
