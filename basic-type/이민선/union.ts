@@ -6,31 +6,40 @@
    *
    * 자동완성이 아주 유용합니다. 👍
    */
-
-  type Field = "front-end" | "back-end" | "mobile-app" | "AI";
+  type Job = "developer" | "designer";
+  type DeveloperField = "front-end" | "back-end" | "mobile-app" | "AI";
+  type DesignerField = "graphic" | "web" | "mobile" | "UX";
   type Industry = "game" | "e-commerce" | "finance";
 
   // key들의 type을 지정
-  type SoftwareDeveloper = {
+  type Developer = {
     name: string;
-    // type Field를 field라는 변수에 지정
-    field: Field;
-    // type Industry를 industry라는 변수에 지정
+    job: Job;
+    field: DeveloperField;
     industry: Industry;
   };
 
-  function makeSoftwareDeveloper(
+  type Designer = {
+    name: string;
+    job: Job;
+    field: DesignerField;
+    industry: Industry;
+  };
+
+  function WorkerInIT(
     name: string,
-    field: Field,
+    job: Job,
+    field: DeveloperField | DesignerField,
     industry: Industry
-  ): SoftwareDeveloper {
+  ): Developer | Designer {
     return {
       name,
+      job,
       field,
       industry,
     };
   }
 
-  console.log(makeSoftwareDeveloper("이민선", "front-end", "game"));
-  console.log(makeSoftwareDeveloper("이수민", "front-end", "e-commerce"));
+  console.log(WorkerInIT("이민선", "developer", "front-end", "game"));
+  console.log(WorkerInIT("이수민", "developer", "front-end", "e-commerce"));
 }
