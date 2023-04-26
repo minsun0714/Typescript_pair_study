@@ -2,10 +2,10 @@
   type PaymentMethod = "credit card" | "mobile-pay" | "cash";
   type Item = "egg" | "coffee" | "noodle";
 
-  interface Receipt {
+  type Receipt = {
     shoppingList: Item[];
     payment: PaymentMethod;
-  }
+  };
 
   function makeReceipt(
     itemToAdd: Item,
@@ -13,7 +13,6 @@
     shoppingList: Item[] = [],
     // payment라는 매개변수에 인자를 전달하지 않은 경우 default parameter로 빈 배열이 할당된다.
     payment: PaymentMethod = "credit card"
-    // interface Receipt 지정. interface는 다음 시간에 배울 타입이고, 미리보기로 지정해보았습니다.
   ): Receipt {
     shoppingList.push(itemToAdd);
     return {
