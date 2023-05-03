@@ -24,7 +24,7 @@
     };
   }
 
-  // Redux의 reducer에서도 action 객체의 property가 모두 다르더라도, type이라는 공통 property를 가지고 분기할 수 있습니다.
+  // Redux의 reducer에서도 action 객체의 property가 모두 다르더라도, type이라는 공통 property를 가지고 분기할 수 있다.
   const reducer = (
     flightBookingState: FlightBooking[] = [],
     // Add와 Delete의 property가 다르지만, type이라는 공통 property를 기준으로 분기함
