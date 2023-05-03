@@ -21,6 +21,7 @@
   ).getDate() as LastDate;
 
   // 대안: 타입 가드 함수
+  // num is LastDate <- 인자가 LastDate type 인지 확인 후 boolean type의 값을 return 한다.
   function isLastDate(num: number): num is LastDate {
     return [28, 29, 30, 31].includes(num);
   }
