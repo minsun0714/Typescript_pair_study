@@ -4,19 +4,19 @@
  // Intersection 그 모든것을 다 합한 = &
  // 다양한 타입들을 하나로 묶어서 사용 가능
 
-  type Person = {
+  type Information1 = {
     name: string;
     age: number;
   }
 
-  type Information = {
+  type Information2 = {
     hobby: string[];
     job: string;
   }
 
-  type Amy = Person & Information;
+  type Person = Information1 & Information2;
 
-  let girl1 : Amy = {
+  let girl : Person = {
     name: 'Amy',
     age: 12,
     hobby: ['watching movie', 'running', 'cooking'],
