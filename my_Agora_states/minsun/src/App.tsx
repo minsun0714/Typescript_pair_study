@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Pagination from "./components/Pagination";
+import Pagination from "./components/Paginations/Pagination";
 
 const Main = styled.main`
   display: flex;
