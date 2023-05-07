@@ -53,6 +53,11 @@ function App() {
 
   return (
     <main>
+      <Board>
+        <input placeholder='이름을 입력하세요'></input>
+        <textarea placeholder='질문을 입력하세요'></textarea>
+        <button>제출</button>
+      </Board>
       <ul>
         {discussions.map((discussion) => (
           <Card key={discussion.id}>
