@@ -17,6 +17,8 @@
         furColor: 'white',
         weight: 3.8,
     };
+    cat.name = 'string';
+    cat.name = 100;
 
     
     function add(x: number, y: number) {
