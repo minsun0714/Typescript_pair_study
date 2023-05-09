@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Pagination from "../Paginations/Pagination";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createDiscussion } from "../../store/store";
 
 const Main = styled.main`
