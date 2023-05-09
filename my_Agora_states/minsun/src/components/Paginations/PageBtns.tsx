@@ -1,7 +1,8 @@
+import React from "react";
 import styled from "styled-components";
 
 function PageBtns({ itemsPerPage, totalPages, onPageChange }: any) {
-  const pages = [];
+  const pages: number[] = [];
   for (let i = 1; i <= Math.ceil(totalPages / itemsPerPage); i++) {
     pages.push(i);
   }
