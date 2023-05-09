@@ -6,7 +6,7 @@ type Discussions = {
     avatarURL: string;
     bodyHTML: string;
     createdAt: string;
-    id: string;
+    id: number;
     url: string;
   };
   author: string;
