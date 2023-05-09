@@ -2,6 +2,15 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PageBtns from "./PageBtns";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { createDiscussion } from "../../store/store";
+
+const DiscussionsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Card = styled.div`
   display: flex;
@@ -11,6 +20,7 @@ const Card = styled.div`
   border-radius: 20px;
   height: 70px;
   margin: 20px;
+  width: 50vw;
 `;
 function Pagination() {
   type Discussions = {
@@ -36,13 +46,17 @@ function Pagination() {
   const itemsPerPage: ItemsPerPage = 7;
   const [discussions, setDiscussions] = useState<Discussions[]>([]);
   const [currentItems, setCurrentItems] = useState<Discussions[]>([]);
+  const dispatch = useDispatch();
+  const state = useSelector((state: Discussions[]) => state);
 
   useEffect(() => {
     axios
       .get("http://localhost:4000/discussions/")
       .then((response) => {
         setDiscussions(response.data);
-        setCurrentItems(discussions.slice(0, itemsPerPage));
+        for (let i = 0; i < response.data.length; i++) {
+          dispatch(createDiscussion(response.data[i]));
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -52,15 +66,15 @@ function Pagination() {
   const handlePageChange = (page: number) => {
     const indexOfLastItem: number = page * itemsPerPage;
     const indexOfFirstItem: number = indexOfLastItem - itemsPerPage;
-    setCurrentItems(discussions.slice(indexOfFirstItem, indexOfLastItem));
+    setCurrentItems(state.slice(indexOfFirstItem, indexOfLastItem));
   };
 
   useEffect(() => {
-    setCurrentItems(discussions.slice(0, itemsPerPage));
-  }, [discussions]);
+    setCurrentItems(state.slice(0, itemsPerPage));
+  }, [discussions, state]);
 
   return (
-    <div>
+    <DiscussionsWrapper>
       <ul>
         {currentItems.map((discussion) => (
           <Card key={discussion.id}>
@@ -77,7 +91,7 @@ function Pagination() {
         totalPages={discussions.length}
         onPageChange={handlePageChange}
       />
-    </div>
+    </DiscussionsWrapper>
   );
 }
 export default Pagination;
