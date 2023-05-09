@@ -41,17 +41,14 @@ function Discussions() {
   const [userName, setUserName] = useState("");
   const [discussionTitle, setDiscussionTitle] = useState("");
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
 
   const onChangeUserName = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.currentTarget.value);
     setUserName(event.currentTarget.value);
   };
 
   const onChangeDiscussionTitle = (
     event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
-    console.log(event.currentTarget.value);
     setDiscussionTitle(event.currentTarget.value);
   };
 
