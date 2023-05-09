@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PageBtns from "./PageBtns";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 
 const Card = styled.div`
   display: flex;
@@ -13,6 +14,8 @@ const Card = styled.div`
   margin: 20px;
 `;
 function Pagination() {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
   type Discussions = {
     answer: {
       author: string;
