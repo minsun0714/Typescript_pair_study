@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import PageBtns from "./PageBtns";
 import styled from "styled-components";
@@ -11,7 +11,6 @@ const DiscussionsWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
 const Card = styled.div`
   display: flex;
   justify-content: center;
@@ -41,6 +40,7 @@ function Pagination() {
     title: string;
     updatedAt: string;
   };
+
   type ItemsPerPage = 7 | 10;
 
   const itemsPerPage: ItemsPerPage = 7;
@@ -54,7 +54,7 @@ function Pagination() {
       .get("http://localhost:4000/discussions/")
       .then((response) => {
         setDiscussions(response.data);
-        for (let i = 0; i < response.data.length; i++) {
+        for (let i = response.data.length - 1; i >= 0; i--) {
           dispatch(createDiscussion(response.data[i]));
         }
       })
@@ -71,7 +71,7 @@ function Pagination() {
 
   useEffect(() => {
     setCurrentItems(state.slice(0, itemsPerPage));
-  }, [discussions, state]);
+  }, [state]);
 
   return (
     <DiscussionsWrapper>
@@ -88,7 +88,7 @@ function Pagination() {
       </ul>
       <PageBtns
         itemsPerPage={itemsPerPage}
-        totalPages={discussions.length}
+        totalPages={state.length}
         onPageChange={handlePageChange}
       />
     </DiscussionsWrapper>
