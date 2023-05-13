@@ -64,14 +64,13 @@ function Discussions() {
       createDiscussion({
         answer: null,
         author: userName,
-        avatarURL:
-          "https://velog.velcdn.com/images/jasmine0714/post/c2872cf3-d1a1-4f86-8a25-cce9311f1022/image.png",
-        bodyHTML: "hi",
-        createdAt: "hi",
+        avatarURL: null,
+        bodyHTML: null,
+        createdAt: JSON.stringify(new Date()),
         id: Date.now(),
-        url: "hi",
+        url: null,
         title: discussionTitle,
-        updatedAt: "hi",
+        updatedAt: null,
       })
     );
     setUserName("");
