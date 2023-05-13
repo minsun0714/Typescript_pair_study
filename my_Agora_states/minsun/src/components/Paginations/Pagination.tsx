@@ -5,6 +5,11 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { createDiscussion } from "../../store/store";
 
+const Board = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const DiscussionsWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -15,24 +20,25 @@ const Card = styled.li`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid green;
   border-radius: 20px;
   height: 70px;
   margin: 20px;
   width: 50vw;
-`;
-
-const Img = styled.img`
-  height: 40px;
-  width: 40px;
-  border-radius: 100px;
+  background-color: pink;
+  box-shadow: 1px 1px 5px gray;
+  text-align: center;
 `;
 
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 4vw;
 `;
+
+const Title = styled.h3`
+  margin-top: 10px;
+`;
+
+const Author = styled.span``;
 function Pagination() {
   type Discussions = {
     answer: {
@@ -42,7 +48,7 @@ function Pagination() {
       createdAt: string;
       id: string;
       url: string;
-    };
+    } | null;
     author: string;
     avatarURL: string;
     bodyHTML: string;
@@ -86,24 +92,26 @@ function Pagination() {
   }, [state]);
 
   return (
-    <DiscussionsWrapper>
-      <ul>
-        {currentItems.map((discussion) => (
-          <Card key={discussion.id}>
-            <Img src={discussion.avatarURL} />
-            <Content>
-              <span>{discussion.title}</span>
-              <span>{discussion.author}</span>
-            </Content>
-          </Card>
-        ))}
-      </ul>
-      <PageBtns
-        itemsPerPage={itemsPerPage}
-        totalPages={state.length}
-        onPageChange={handlePageChange}
-      />
-    </DiscussionsWrapper>
+    <Board>
+      <DiscussionsWrapper>
+        <ul>
+          {currentItems.map((discussion) => (
+            <Card key={discussion.id}>
+              <Content>
+                <Title>{discussion.title}</Title>
+                <Author>{discussion.author}</Author>
+              </Content>
+            </Card>
+          ))}
+        </ul>
+        <PageBtns
+          itemsPerPage={itemsPerPage}
+          totalPages={state.length}
+          onPageChange={handlePageChange}
+        />
+      </DiscussionsWrapper>
+    </Board>
   );
 }
+
 export default Pagination;
