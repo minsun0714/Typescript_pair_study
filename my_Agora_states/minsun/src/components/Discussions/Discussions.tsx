@@ -16,6 +16,30 @@ const Board = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 50px;
+  border-radius: 20px;
+  background-image: linear-gradient(to left, gray, silver, gray);
+  box-shadow: 30px 60px 10px rgba(0, 0, 0, 0.2);
+`;
+
+const Question = styled.textarea`
+  font-size: 20px;
+  resize: none;
+  margin: 10px;
+  width: 20vw;
+  height: 500px;
+`;
+
+const SubmitBtn = styled.button`
+  background-color: yellowgreen;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  height: 40px;
+  width: 12vw;
+  box-shadow: 1px 1px 30px gray;
+  font-size: 20px;
+  font-weight: 700;
 `;
 
 type Discussions = {
@@ -81,12 +105,12 @@ function Discussions() {
           value={userName}
           onChange={onChangeUserName}
         ></input>
-        <textarea
+        <Question
           placeholder='질문을 입력하세요'
           value={discussionTitle}
           onChange={onChangeDiscussionTitle}
-        ></textarea>
-        <button>제출</button>
+        ></Question>
+        <SubmitBtn>등록</SubmitBtn>
       </Board>
       <Pagination />
     </Main>
