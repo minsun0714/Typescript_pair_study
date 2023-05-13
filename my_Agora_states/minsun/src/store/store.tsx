@@ -1,6 +1,6 @@
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type Discussions = {
+type Discussion = {
   answer: {
     author: string;
     avatarURL: string;
@@ -19,15 +19,15 @@ type Discussions = {
   updatedAt: string;
 };
 
-const initialDiscussionState: Discussions[] = [];
+const initialDiscussionState: Discussion[] = [];
 
 export const discussion = createSlice({
   name: "discussionReducer",
   initialState: initialDiscussionState,
   reducers: {
     createDiscussion: (
-      state: Discussions[],
-      action: PayloadAction<Discussions>
+      state: Discussion[],
+      action: PayloadAction<Discussion>
     ) => {
       return [action.payload, ...state];
     },
