@@ -11,7 +11,7 @@ const DiscussionsWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const Card = styled.div`
+const Card = styled.li`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,6 +20,18 @@ const Card = styled.div`
   height: 70px;
   margin: 20px;
   width: 50vw;
+`;
+
+const Img = styled.img`
+  height: 40px;
+  width: 40px;
+  border-radius: 100px;
+`;
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 4vw;
 `;
 function Pagination() {
   type Discussions = {
@@ -78,11 +90,11 @@ function Pagination() {
       <ul>
         {currentItems.map((discussion) => (
           <Card key={discussion.id}>
-            <li>
+            <Img src={discussion.avatarURL} />
+            <Content>
               <span>{discussion.title}</span>
-              <br />
               <span>{discussion.author}</span>
-            </li>
+            </Content>
           </Card>
         ))}
       </ul>
