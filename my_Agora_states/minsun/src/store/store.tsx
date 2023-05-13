@@ -10,13 +10,13 @@ export type Discussion = {
     url: string;
   } | null;
   author: string;
-  avatarURL: string;
-  bodyHTML: string;
+  avatarURL: string | null;
+  bodyHTML: string | null;
   createdAt: string;
   id: number;
-  url: string;
+  url: string | null;
   title: string;
-  updatedAt: string;
+  updatedAt: string | null;
 };
 
 const initialDiscussionState: Discussion[] = [];
