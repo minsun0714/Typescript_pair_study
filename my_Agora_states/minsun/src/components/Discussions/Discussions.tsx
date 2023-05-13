@@ -84,10 +84,12 @@ function Discussions() {
       <Board onSubmit={onSubmit}>
         <input
           placeholder='이름을 입력하세요'
+          value={userName}
           onChange={onChangeUserName}
         ></input>
         <textarea
           placeholder='질문을 입력하세요'
+          value={discussionTitle}
           onChange={onChangeDiscussionTitle}
         ></textarea>
         <button>제출</button>
