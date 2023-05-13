@@ -10,15 +10,13 @@ const PageBtn = styled.button`
   box-shadow: 0px 0px 3px black;
 `;
 
-function PageBtns({
-  itemsPerPage,
-  totalPages,
-  onPageChange,
-}: {
+interface IPageBtns {
   itemsPerPage: number;
   totalPages: number;
-  onPageChange: any;
-}) {
+  onPageChange: (buttonNumber: number) => void;
+}
+
+function PageBtns({ itemsPerPage, totalPages, onPageChange }: IPageBtns) {
   const pages: number[] = [];
   for (let i = 1; i <= Math.ceil(totalPages / itemsPerPage); i++) {
     pages.push(i);
