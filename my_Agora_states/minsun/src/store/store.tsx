@@ -8,7 +8,7 @@ type Discussions = {
     createdAt: string;
     id: number;
     url: string;
-  };
+  } | null;
   author: string;
   avatarURL: string;
   bodyHTML: string;
