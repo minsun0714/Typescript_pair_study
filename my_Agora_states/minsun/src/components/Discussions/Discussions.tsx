@@ -42,25 +42,6 @@ const SubmitBtn = styled.button`
   font-weight: 700;
 `;
 
-type Discussions = {
-  answer: {
-    author: string;
-    avatarURL: string;
-    bodyHTML: string;
-    createdAt: string;
-    id: string;
-    url: string;
-  } | null;
-  author: string;
-  avatarURL: string;
-  bodyHTML: string;
-  createdAt: string;
-  id: number;
-  url: string;
-  title: string;
-  updatedAt: string;
-};
-
 function Discussions() {
   const [userName, setUserName] = useState("");
   const [discussionTitle, setDiscussionTitle] = useState("");
