@@ -1,6 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
+const PageBtn = styled.button`
+  margin: 4px;
+  background-color: whitesmoke;
+  border: none;
+  height: 30px;
+  width: 40px;
+  box-shadow: 0px 0px 3px black;
+`;
+
 function PageBtns({
   itemsPerPage,
   totalPages,
@@ -22,9 +31,9 @@ function PageBtns({
   return (
     <div>
       {pages.map((page) => (
-        <button key={page} onClick={onClick}>
+        <PageBtn key={page} onClick={onClick}>
           {page}
-        </button>
+        </PageBtn>
       ))}
     </div>
   );
