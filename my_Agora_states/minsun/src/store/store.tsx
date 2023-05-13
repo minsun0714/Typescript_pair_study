@@ -1,6 +1,6 @@
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type Discussion = {
+export type Discussion = {
   answer: {
     author: string;
     avatarURL: string;

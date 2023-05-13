@@ -3,7 +3,7 @@ import axios from "axios";
 import PageBtns from "./PageBtns";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { createDiscussion } from "../../store/store";
+import { createDiscussion, Discussion } from "../../store/store";
 
 const Board = styled.div`
   display: flex;
@@ -44,32 +44,13 @@ const Author = styled.span`
   margin-top: -10px;
 `;
 function Pagination() {
-  type Discussions = {
-    answer: {
-      author: string;
-      avatarURL: string;
-      bodyHTML: string;
-      createdAt: string;
-      id: string;
-      url: string;
-    } | null;
-    author: string;
-    avatarURL: string;
-    bodyHTML: string;
-    createdAt: string;
-    id: number;
-    url: string;
-    title: string;
-    updatedAt: string;
-  };
-
   type ItemsPerPage = 7 | 10;
 
   const itemsPerPage: ItemsPerPage = 7;
-  const [discussions, setDiscussions] = useState<Discussions[]>([]);
-  const [currentItems, setCurrentItems] = useState<Discussions[]>([]);
+  const [discussions, setDiscussions] = useState<Discussion[]>([]);
+  const [currentItems, setCurrentItems] = useState<Discussion[]>([]);
   const dispatch = useDispatch();
-  const state = useSelector((state: Discussions[]) => state);
+  const state = useSelector((state: Discussion[]) => state);
 
   useEffect(() => {
     axios
