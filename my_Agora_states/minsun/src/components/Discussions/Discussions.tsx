@@ -26,7 +26,7 @@ type Discussions = {
     createdAt: string;
     id: string;
     url: string;
-  };
+  } | null;
   author: string;
   avatarURL: string;
   bodyHTML: string;
@@ -57,16 +57,10 @@ function Discussions() {
     if (userName.length === 0 || discussionTitle.length === 0) return;
     dispatch(
       createDiscussion({
-        answer: {
-          author: userName,
-          avatarURL: "hi",
-          bodyHTML: "hi",
-          createdAt: "hi",
-          id: Date.now(),
-          url: "hi",
-        },
+        answer: null,
         author: userName,
-        avatarURL: "hi",
+        avatarURL:
+          "https://velog.velcdn.com/images/jasmine0714/post/c2872cf3-d1a1-4f86-8a25-cce9311f1022/image.png",
         bodyHTML: "hi",
         createdAt: "hi",
         id: Date.now(),
