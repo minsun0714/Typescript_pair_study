@@ -54,6 +54,7 @@ function Discussions() {
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (userName.length === 0 || discussionTitle.length === 0) return;
     dispatch(
       createDiscussion({
         answer: {
