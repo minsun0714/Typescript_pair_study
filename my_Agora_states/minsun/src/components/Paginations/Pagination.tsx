@@ -38,7 +38,11 @@ const Title = styled.h3`
   margin-top: 10px;
 `;
 
-const Author = styled.span``;
+const Author = styled.span`
+  color: gray;
+  font-size: 15px;
+  margin-top: -10px;
+`;
 function Pagination() {
   type Discussions = {
     answer: {
