@@ -24,7 +24,7 @@ const Card = styled.li`
   height: 70px;
   margin: 20px;
   width: 50vw;
-  background-color: pink;
+  background-color: #bee7f8;
   box-shadow: 1px 1px 5px gray;
   text-align: center;
 `;
