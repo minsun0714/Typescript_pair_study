@@ -47,7 +47,7 @@ function Pagination() {
   type ItemsPerPage = 7 | 10;
 
   const itemsPerPage: ItemsPerPage = 7;
-  const [discussions, setDiscussions] = useState<Discussion[]>([]);
+  // const [discussions, setDiscussions] = useState<Discussion[]>([]);
   const [currentItems, setCurrentItems] = useState<Discussion[]>([]);
   const dispatch = useDispatch();
   const state = useSelector((state: Discussion[]) => state);
@@ -57,7 +57,7 @@ function Pagination() {
       axios
         .get("http://localhost:4000/discussions/")
         .then((response) => {
-          setDiscussions(response.data);
+          // setDiscussions(response.data);
           for (let i = response.data.length - 1; i >= 0; i--) {
             dispatch(createDiscussion(response.data[i]));
           }
