@@ -53,17 +53,19 @@ function Pagination() {
   const state = useSelector((state: Discussion[]) => state);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/discussions/")
-      .then((response) => {
-        setDiscussions(response.data);
-        for (let i = response.data.length - 1; i >= 0; i--) {
-          dispatch(createDiscussion(response.data[i]));
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (state.length === 0) {
+      axios
+        .get("http://localhost:4000/discussions/")
+        .then((response) => {
+          setDiscussions(response.data);
+          for (let i = response.data.length - 1; i >= 0; i--) {
+            dispatch(createDiscussion(response.data[i]));
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }, []);
 
   const handlePageChange = (page: number) => {
