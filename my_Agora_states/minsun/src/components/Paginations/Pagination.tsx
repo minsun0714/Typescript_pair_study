@@ -30,6 +30,7 @@ const Card = styled.li`
 `;
 
 const Content = styled.div`
+  position: absolute;
   display: flex;
   flex-direction: column;
 `;
@@ -43,6 +44,20 @@ const Author = styled.span`
   font-size: 15px;
   margin-top: -10px;
 `;
+
+const BtnWrapper = styled(Content)`
+  margin-left: 630px;
+`;
+
+const Btn = styled.button`
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  height: 40px;
+  width: 40px;
+  border-radius: 100px;
+  background-color: orange;
+  color: white;
+`;
+
 function Pagination() {
   type ItemsPerPage = 7 | 10;
 
@@ -76,6 +91,8 @@ function Pagination() {
     setCurrentItems(state.slice(0, itemsPerPage));
   }, [state]);
 
+  const handleDelete = () => {};
+
   return (
     <Board>
       <DiscussionsWrapper>
@@ -86,6 +103,9 @@ function Pagination() {
                 <Title>{discussion.title}</Title>
                 <Author>{discussion.author}</Author>
               </Content>
+              <BtnWrapper>
+                <Btn>삭제</Btn>
+              </BtnWrapper>
             </Card>
           ))}
         </ul>
