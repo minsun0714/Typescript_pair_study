@@ -1,13 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
+const PageBtnWrapper = styled.div`
+  margin: -20px 0 5px;
+`;
+
 const PageBtn = styled.button`
   margin: 4px;
-  background-color: whitesmoke;
+  background-color: white;
   border: none;
   height: 30px;
   width: 40px;
-  box-shadow: 0px 0px 3px black;
+  box-shadow: 0px 0px 3px skyblue;
 `;
 
 interface IPageBtns {
@@ -27,13 +31,13 @@ function PageBtns({ itemsPerPage, totalPages, onPageChange }: IPageBtns) {
   };
 
   return (
-    <div>
+    <PageBtnWrapper>
       {pages.map((page) => (
         <PageBtn key={page} onClick={onClick}>
           {page}
         </PageBtn>
       ))}
-    </div>
+    </PageBtnWrapper>
   );
 }
 
