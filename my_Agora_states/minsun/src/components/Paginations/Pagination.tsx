@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   createDiscussion,
   deleteDiscussion,
+  updateDiscussion,
   Discussion,
 } from "../../store/store";
 
@@ -49,11 +50,15 @@ const Author = styled.span`
   margin-top: -10px;
 `;
 
+const UpdateInput = styled.input`
+  margin-right: 0;
+`;
+
 const BtnWrapper = styled(Content)`
-  position: relative;
+  position: fixed;
   display: flex;
   flex-direction: row;
-  margin-left: 610px;
+  margin-left: 560px;
 `;
 
 const Btn = styled.button`
@@ -67,7 +72,7 @@ const Btn = styled.button`
 `;
 
 function Pagination() {
-  type ItemsPerPage = 4 | 10;
+  type ItemsPerPage = 4 | 5;
 
   const itemsPerPage: ItemsPerPage = 4;
   const [currentItems, setCurrentItems] = useState<Discussion[]>([]);
@@ -99,7 +104,44 @@ function Pagination() {
     setCurrentItems(state.slice(0, itemsPerPage));
   }, [state]);
 
+  const [isUpdateBtnClicked, setIsUpdateBtnClicked] = useState(false);
+  const [targetId, setTargetId] = useState(0);
+  const [updatedContent, setUpdatedContent] = useState("");
+
+  const onChangeUpdatedContent = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setUpdatedContent(event.currentTarget.value);
+  };
+
+  const handleUpdate = (id: number, currentTitle: string) => {
+    if (!isUpdateBtnClicked) {
+      setIsUpdateBtnClicked(true);
+      setTargetId(id);
+      setUpdatedContent(currentTitle);
+      return;
+    }
+
+    const discussionToUpdate = state.find(
+      (discussion: Discussion) => discussion.id === id
+    );
+    if (id !== targetId) {
+      setIsUpdateBtnClicked(false);
+      return;
+    }
+    if (discussionToUpdate) {
+      const payload = { ...discussionToUpdate, title: updatedContent };
+
+      dispatch(updateDiscussion(payload));
+    }
+    setIsUpdateBtnClicked(false);
+  };
+
   const handleDelete = (id: number) => {
+    if (isUpdateBtnClicked) {
+      setIsUpdateBtnClicked(false);
+      return;
+    }
     const targetItem: Discussion | undefined = state.find(
       (item: Discussion) => item.id === id
     );
@@ -112,12 +154,31 @@ function Pagination() {
         <ul>
           {currentItems.map((discussion) => (
             <Card key={discussion.id}>
-              <Content>
-                <Title>{discussion.title.slice(0, 40) + "..."}</Title>
-                <Author>{discussion.author}</Author>
-              </Content>
+              {isUpdateBtnClicked && discussion.id === targetId ? (
+                <UpdateInput
+                  placeholder='수정할 내용을 입력해주세요'
+                  value={updatedContent}
+                  onChange={onChangeUpdatedContent}
+                ></UpdateInput>
+              ) : (
+                <Content>
+                  <Title>
+                    {discussion.title.length > 40
+                      ? discussion.title.slice(0, 40) + "..."
+                      : discussion.title}
+                  </Title>
+                  <Author>{discussion.author}</Author>
+                </Content>
+              )}
               <BtnWrapper>
-                <Btn onClick={() => handleDelete(discussion.id)}>삭제</Btn>
+                <Btn
+                  onClick={() => handleUpdate(discussion.id, discussion.title)}
+                >
+                  {isUpdateBtnClicked ? "완료" : "수정"}
+                </Btn>
+                <Btn onClick={() => handleDelete(discussion.id)}>
+                  {isUpdateBtnClicked ? "취소" : "삭제"}
+                </Btn>
               </BtnWrapper>
             </Card>
           ))}

@@ -54,8 +54,29 @@ export const discussion = createSlice({
       localStorage.removeItem(String(action.payload.id));
       return state.filter((item: Discussion) => item.id !== action.payload.id);
     },
+    updateDiscussion: (
+      state: Discussion[],
+      action: PayloadAction<Discussion>
+    ) => {
+      localStorage.removeItem(String(action.payload.id));
+      localStorage.setItem(
+        String(action.payload.id),
+        JSON.stringify(action.payload)
+      );
+
+      const targetDiscussion = state.find(
+        (discussion: Discussion) => discussion.id === action.payload.id
+      );
+
+      return state.map((discussion: Discussion) =>
+        discussion.id === action.payload.id
+          ? { ...discussion, title: action.payload.title }
+          : discussion
+      );
+    },
   },
 });
 
 export const store = configureStore({ reducer: discussion.reducer });
-export const { createDiscussion, deleteDiscussion } = discussion.actions;
+export const { createDiscussion, deleteDiscussion, updateDiscussion } =
+  discussion.actions;
