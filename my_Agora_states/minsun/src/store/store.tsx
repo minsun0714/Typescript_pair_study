@@ -47,8 +47,15 @@ export const discussion = createSlice({
       );
       return [action.payload, ...state];
     },
+    deleteDiscussion: (
+      state: Discussion[],
+      action: PayloadAction<Discussion>
+    ) => {
+      localStorage.removeItem(String(action.payload.id));
+      return state.filter((item: Discussion) => item.id !== action.payload.id);
+    },
   },
 });
 
 export const store = configureStore({ reducer: discussion.reducer });
-export const { createDiscussion } = discussion.actions;
+export const { createDiscussion, deleteDiscussion } = discussion.actions;

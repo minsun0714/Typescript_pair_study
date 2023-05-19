@@ -3,7 +3,11 @@ import axios from "axios";
 import PageBtns from "./PageBtns";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { createDiscussion, Discussion } from "../../store/store";
+import {
+  createDiscussion,
+  deleteDiscussion,
+  Discussion,
+} from "../../store/store";
 
 const Board = styled.div`
   display: flex;
@@ -91,7 +95,12 @@ function Pagination() {
     setCurrentItems(state.slice(0, itemsPerPage));
   }, [state]);
 
-  const handleDelete = () => {};
+  const handleDelete = (id: number) => {
+    const targetItem: Discussion | undefined = state.find(
+      (item: Discussion) => item.id === id
+    );
+    if (targetItem) dispatch(deleteDiscussion(targetItem));
+  };
 
   return (
     <Board>
@@ -104,7 +113,7 @@ function Pagination() {
                 <Author>{discussion.author}</Author>
               </Content>
               <BtnWrapper>
-                <Btn>삭제</Btn>
+                <Btn onClick={() => handleDelete(discussion.id)}>삭제</Btn>
               </BtnWrapper>
             </Card>
           ))}
