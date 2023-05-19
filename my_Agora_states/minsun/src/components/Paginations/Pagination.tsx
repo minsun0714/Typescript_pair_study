@@ -25,7 +25,7 @@ const Card = styled.li`
   justify-content: center;
   align-items: center;
   border-radius: 20px;
-  height: 70px;
+  height: 100px;
   margin: 20px;
   width: 50vw;
   background-color: #bee7f8;
@@ -50,22 +50,26 @@ const Author = styled.span`
 `;
 
 const BtnWrapper = styled(Content)`
-  margin-left: 630px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  margin-left: 610px;
 `;
 
 const Btn = styled.button`
   border: 1px solid rgba(0, 0, 0, 0.1);
   height: 40px;
   width: 40px;
-  border-radius: 100px;
-  background-color: orange;
+  border-radius: 16px;
+  background-color: #299ecc;
+  padding-right: 8px;
   color: white;
 `;
 
 function Pagination() {
-  type ItemsPerPage = 7 | 10;
+  type ItemsPerPage = 4 | 10;
 
-  const itemsPerPage: ItemsPerPage = 7;
+  const itemsPerPage: ItemsPerPage = 4;
   const [currentItems, setCurrentItems] = useState<Discussion[]>([]);
   const dispatch = useDispatch();
   const state = useSelector((state: Discussion[]) => state);
@@ -109,7 +113,7 @@ function Pagination() {
           {currentItems.map((discussion) => (
             <Card key={discussion.id}>
               <Content>
-                <Title>{discussion.title}</Title>
+                <Title>{discussion.title.slice(0, 40) + "..."}</Title>
                 <Author>{discussion.author}</Author>
               </Content>
               <BtnWrapper>
