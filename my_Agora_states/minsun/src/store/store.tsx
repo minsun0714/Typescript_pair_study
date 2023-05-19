@@ -36,13 +36,22 @@ initialDiscussionStateLocalStorage.sort((a, b) => b.id - a.id);
 
 export type ToastAction = "add" | "delete" | "update";
 
+export type ToastMsg =
+  | "질문이 추가되었습니다."
+  | "질문이 수정되었습니다."
+  | "질문이 삭제되었습니다.";
+
+const addMsg: ToastMsg = "질문이 추가되었습니다.";
+const updateMsg: ToastMsg = "질문이 수정되었습니다.";
+const deleteMsg: ToastMsg = "질문이 삭제되었습니다.";
+
 const tostify = (actionType: ToastAction) =>
   toast(
     actionType === "add"
-      ? "질문이 추가되었습니다."
+      ? addMsg
       : actionType === "update"
-      ? "질문이 수정되었습니다."
-      : "질문이 삭제되었습니다.",
+      ? updateMsg
+      : deleteMsg,
     { position: toast.POSITION.TOP_RIGHT }
   );
 
