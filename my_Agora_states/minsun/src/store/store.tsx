@@ -1,4 +1,5 @@
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 export type Discussion = {
   answer: {
@@ -33,6 +34,18 @@ for (let key in localStorage) {
 
 initialDiscussionStateLocalStorage.sort((a, b) => b.id - a.id);
 
+export type ToastAction = "add" | "delete" | "update";
+
+const tostify = (actionType: ToastAction) =>
+  toast(
+    actionType === "add"
+      ? "질문이 추가되었습니다."
+      : actionType === "update"
+      ? "질문이 수정되었습니다."
+      : "질문이 삭제되었습니다.",
+    { position: toast.POSITION.TOP_RIGHT }
+  );
+
 export const discussion = createSlice({
   name: "discussionReducer",
   initialState: initialDiscussionStateLocalStorage,
@@ -45,6 +58,9 @@ export const discussion = createSlice({
         String(action.payload.id),
         JSON.stringify(action.payload)
       );
+
+      tostify("add");
+
       return [action.payload, ...state];
     },
     deleteDiscussion: (
@@ -52,6 +68,9 @@ export const discussion = createSlice({
       action: PayloadAction<Discussion>
     ) => {
       localStorage.removeItem(String(action.payload.id));
+
+      tostify("delete");
+
       return state.filter((item: Discussion) => item.id !== action.payload.id);
     },
     updateDiscussion: (
@@ -64,9 +83,7 @@ export const discussion = createSlice({
         JSON.stringify(action.payload)
       );
 
-      const targetDiscussion = state.find(
-        (discussion: Discussion) => discussion.id === action.payload.id
-      );
+      tostify("update");
 
       return state.map((discussion: Discussion) =>
         discussion.id === action.payload.id
