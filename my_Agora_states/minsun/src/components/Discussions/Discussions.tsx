@@ -9,6 +9,8 @@ const Main = styled.main`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  height: 90vh;
+  margin-top: 20px;
 `;
 
 const Board = styled.form`
@@ -20,6 +22,11 @@ const Board = styled.form`
   border-radius: 20px;
   background-image: linear-gradient(to left, gray, silver, gray);
   box-shadow: 30px 60px 10px rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 1500px) {
+    height: 75vh;
+    width: 22vw;
+  }
 `;
 
 const Question = styled.textarea`
