@@ -38,6 +38,7 @@ const Content = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 const Title = styled.h3`
@@ -45,17 +46,28 @@ const Title = styled.h3`
 `;
 
 const Author = styled.span`
+  position: fixed;
   color: gray;
   font-size: 15px;
-  margin-top: -10px;
+  margin-top: 37px;
 `;
 
 const UpdateInput = styled.input`
-  margin-right: 0;
+  margin-bottom: 24px;
+  margin-top: 5px;
+  text-align: center;
+  border: none;
+  background-color: #bee7f8;
+  font-size: large;
+  width: 680px;
+  border-radius: 5px;
+  outline: none;
+  color: rgba(0, 0, 0, 0.5);
 `;
 
 const BtnWrapper = styled(Content)`
-  position: fixed;
+  position: sticky;
+  right: 0;
   display: flex;
   flex-direction: row;
   margin-left: 560px;
@@ -155,11 +167,15 @@ function Pagination() {
           {currentItems.map((discussion) => (
             <Card key={discussion.id}>
               {isUpdateBtnClicked && discussion.id === targetId ? (
-                <UpdateInput
-                  placeholder='수정할 내용을 입력해주세요'
-                  value={updatedContent}
-                  onChange={onChangeUpdatedContent}
-                ></UpdateInput>
+                <Content>
+                  <UpdateInput
+                    autoFocus
+                    placeholder='수정할 내용을 입력해주세요'
+                    value={updatedContent}
+                    onChange={onChangeUpdatedContent}
+                  ></UpdateInput>
+                  <Author>{discussion.author}</Author>
+                </Content>
               ) : (
                 <Content>
                   <Title>
@@ -174,10 +190,14 @@ function Pagination() {
                 <Btn
                   onClick={() => handleUpdate(discussion.id, discussion.title)}
                 >
-                  {isUpdateBtnClicked ? "완료" : "수정"}
+                  {isUpdateBtnClicked && discussion.id === targetId
+                    ? "완료"
+                    : "수정"}
                 </Btn>
                 <Btn onClick={() => handleDelete(discussion.id)}>
-                  {isUpdateBtnClicked ? "취소" : "삭제"}
+                  {isUpdateBtnClicked && discussion.id === targetId
+                    ? "취소"
+                    : "삭제"}
                 </Btn>
               </BtnWrapper>
             </Card>
