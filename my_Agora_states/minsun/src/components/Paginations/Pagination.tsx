@@ -126,24 +126,25 @@ function Pagination() {
     setUpdatedContent(event.currentTarget.value);
   };
 
-  const handleUpdate = (id: number, currentTitle: string) => {
+  const handleUpdate = (id: number, title: string) => {
     if (!isUpdateBtnClicked) {
       setIsUpdateBtnClicked(true);
       setTargetId(id);
-      setUpdatedContent(currentTitle);
+      setUpdatedContent(title);
       return;
     }
 
-    const discussionToUpdate = state.find(
+    const discussionToUpdate: Discussion | undefined = state.find(
       (discussion: Discussion) => discussion.id === id
     );
+
     if (id !== targetId) {
       setIsUpdateBtnClicked(false);
       return;
     }
+
     if (discussionToUpdate) {
       const payload = { ...discussionToUpdate, title: updatedContent };
-
       dispatch(updateDiscussion(payload));
     }
     setIsUpdateBtnClicked(false);
