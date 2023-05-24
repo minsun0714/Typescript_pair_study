@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import PageBtns from "./PageBtns";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  createDiscussion,
   deleteDiscussion,
   updateDiscussion,
   Discussion,
@@ -19,39 +17,26 @@ import {
   BtnWrapper,
   Btn,
 } from "./PaginationStyle";
+import useFetch from "../../util/useFetch";
 
 function Pagination() {
-  type ItemsPerPage = 4 | 5;
-
-  const itemsPerPage: ItemsPerPage = 4;
   const [currentItems, setCurrentItems] = useState<Discussion[]>([]);
   const dispatch = useDispatch();
   const state = useSelector((state: Discussion[]) => state);
 
+  useFetch();
   useEffect(() => {
-    if (state.length === 0) {
-      axios
-        .get("http://localhost:4000/discussions/")
-        .then((response) => {
-          for (let i = response.data.length - 1; i >= 0; i--) {
-            dispatch(createDiscussion(response.data[i]));
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }, []);
+    setCurrentItems(state.slice(0, itemsPerPage));
+  }, [state]);
+
+  type ItemsPerPage = 4 | 5;
+  const itemsPerPage: ItemsPerPage = 4;
 
   const handlePageChange = (page: number) => {
     const indexOfLastItem: number = page * itemsPerPage;
     const indexOfFirstItem: number = indexOfLastItem - itemsPerPage;
     setCurrentItems(state.slice(indexOfFirstItem, indexOfLastItem));
   };
-
-  useEffect(() => {
-    setCurrentItems(state.slice(0, itemsPerPage));
-  }, [state]);
 
   const [isUpdateBtnClicked, setIsUpdateBtnClicked] = useState(false);
   const [targetId, setTargetId] = useState(0);
