@@ -1,24 +1,5 @@
 import React from "react";
-import styled from "styled-components";
-
-const PageBtnWrapper = styled.div`
-  margin: -20px 0 5px;
-`;
-
-const PageBtn = styled.button`
-  margin: 4px;
-  background-color: white;
-  border: none;
-  height: 30px;
-  width: 40px;
-  box-shadow: 0px 0px 3px skyblue;
-`;
-
-interface IPageBtns {
-  itemsPerPage: number;
-  totalPages: number;
-  onPageChange: (buttonNumber: number) => void;
-}
+import { PageBtnWrapper, PageBtn, IPageBtns } from "./PaginationStyle";
 
 function PageBtns({ itemsPerPage, totalPages, onPageChange }: IPageBtns) {
   const pages: number[] = [];

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PageBtns from "./PageBtns";
-import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createDiscussion,
@@ -9,79 +8,17 @@ import {
   updateDiscussion,
   Discussion,
 } from "../../store/store";
-
-const Board = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const DiscussionsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-const Card = styled.li`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px;
-  height: 100px;
-  margin: 20px;
-  width: 50vw;
-  background-color: #bee7f8;
-  box-shadow: 1px 1px 5px gray;
-  text-align: center;
-`;
-
-const Content = styled.div`
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Title = styled.h3`
-  margin-top: 10px;
-`;
-
-const Author = styled.span`
-  position: fixed;
-  color: gray;
-  font-size: 15px;
-  margin-top: 37px;
-`;
-
-const UpdateInput = styled.input`
-  margin-bottom: 24px;
-  margin-top: 5px;
-  text-align: center;
-  border: none;
-  background-color: #bee7f8;
-  font-size: large;
-  width: 680px;
-  border-radius: 5px;
-  outline: none;
-  color: rgba(0, 0, 0, 0.5);
-`;
-
-const BtnWrapper = styled(Content)`
-  position: sticky;
-  right: 0;
-  display: flex;
-  flex-direction: row;
-  margin-left: 560px;
-`;
-
-const Btn = styled.button`
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  height: 40px;
-  width: 40px;
-  border-radius: 16px;
-  background-color: #299ecc;
-  padding-right: 8px;
-  color: white;
-`;
+import {
+  Board,
+  DiscussionsWrapper,
+  Card,
+  Content,
+  Title,
+  Author,
+  UpdateInput,
+  BtnWrapper,
+  Btn,
+} from "./PaginationStyle";
 
 function Pagination() {
   type ItemsPerPage = 4 | 5;

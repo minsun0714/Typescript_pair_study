@@ -1,53 +1,8 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import Pagination from "../Paginations/Pagination";
 import { useDispatch } from "react-redux";
 import { createDiscussion } from "../../store/store";
-
-const Main = styled.main`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  height: 90vh;
-  margin-top: 20px;
-`;
-
-const Board = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 50px;
-  border-radius: 20px;
-  background-image: linear-gradient(to left, gray, silver, gray);
-  box-shadow: 30px 60px 10px rgba(0, 0, 0, 0.2);
-
-  @media (max-width: 1500px) {
-    height: 75vh;
-    width: 22vw;
-  }
-`;
-
-const Question = styled.textarea`
-  font-size: 20px;
-  resize: none;
-  margin: 10px;
-  width: 20vw;
-  height: 500px;
-`;
-
-const SubmitBtn = styled.button`
-  background-color: yellowgreen;
-  color: white;
-  border-radius: 10px;
-  border: none;
-  height: 40px;
-  width: 12vw;
-  box-shadow: 1px 1px 30px gray;
-  font-size: 20px;
-  font-weight: 700;
-`;
+import { Main, Board, Question, SubmitBtn } from "./DiscussionStyle";
 
 function Discussions() {
   const [userName, setUserName] = useState("");
