@@ -1,15 +1,7 @@
 import React from "react";
-import styled from "styled-components";
+import { PageBtnWrapper, PageBtn, IPageBtns } from "./PaginationStyle";
 
-function PageBtns({
-  itemsPerPage,
-  totalPages,
-  onPageChange,
-}: {
-  itemsPerPage: number;
-  totalPages: number;
-  onPageChange: any;
-}) {
+function PageBtns({ itemsPerPage, totalPages, onPageChange }: IPageBtns) {
   const pages: number[] = [];
   for (let i = 1; i <= Math.ceil(totalPages / itemsPerPage); i++) {
     pages.push(i);
@@ -20,13 +12,13 @@ function PageBtns({
   };
 
   return (
-    <div>
+    <PageBtnWrapper>
       {pages.map((page) => (
-        <button key={page} onClick={onClick}>
+        <PageBtn key={page} onClick={onClick}>
           {page}
-        </button>
+        </PageBtn>
       ))}
-    </div>
+    </PageBtnWrapper>
   );
 }
 

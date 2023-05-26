@@ -1,41 +1,8 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import Pagination from "../Paginations/Pagination";
 import { useDispatch } from "react-redux";
 import { createDiscussion } from "../../store/store";
-
-const Main = styled.main`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Board = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-type Discussions = {
-  answer: {
-    author: string;
-    avatarURL: string;
-    bodyHTML: string;
-    createdAt: string;
-    id: string;
-    url: string;
-  };
-  author: string;
-  avatarURL: string;
-  bodyHTML: string;
-  createdAt: string;
-  id: number;
-  url: string;
-  title: string;
-  updatedAt: string;
-};
+import { Main, Board, Question, SubmitBtn } from "./DiscussionStyle";
 
 function Discussions() {
   const [userName, setUserName] = useState("");
@@ -54,24 +21,18 @@ function Discussions() {
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (userName.length === 0 || discussionTitle.length === 0) return;
     dispatch(
       createDiscussion({
-        answer: {
-          author: userName,
-          avatarURL: "hi",
-          bodyHTML: "hi",
-          createdAt: "hi",
-          id: Date.now(),
-          url: "hi",
-        },
+        answer: null,
         author: userName,
-        avatarURL: "hi",
-        bodyHTML: "hi",
-        createdAt: "hi",
+        avatarURL: null,
+        bodyHTML: null,
+        createdAt: JSON.stringify(new Date()),
         id: Date.now(),
-        url: "hi",
+        url: null,
         title: discussionTitle,
-        updatedAt: "hi",
+        updatedAt: null,
       })
     );
     setUserName("");
@@ -83,13 +44,15 @@ function Discussions() {
       <Board onSubmit={onSubmit}>
         <input
           placeholder='이름을 입력하세요'
+          value={userName}
           onChange={onChangeUserName}
         ></input>
-        <textarea
+        <Question
           placeholder='질문을 입력하세요'
+          value={discussionTitle}
           onChange={onChangeDiscussionTitle}
-        ></textarea>
-        <button>제출</button>
+        ></Question>
+        <SubmitBtn>등록</SubmitBtn>
       </Board>
       <Pagination />
     </Main>
