@@ -18,6 +18,7 @@ import {
   Btn,
 } from "./PaginationStyle";
 import useFetch from "../../util/useFetch";
+import Search from "./Search";
 
 function Pagination() {
   const [currentItems, setCurrentItems] = useState<Discussion[]>([]);
@@ -86,6 +87,7 @@ function Pagination() {
   return (
     <Board>
       <DiscussionsWrapper>
+        <Search />
         <ul>
           {currentItems.map((discussion) => (
             <Card key={discussion.id}>

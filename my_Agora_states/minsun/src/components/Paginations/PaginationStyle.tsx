@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const PageBtnWrapper = styled.div`
-  margin: -20px 0 5px;
+  position: fixed;
+  margin-top: 580px;
 `;
 
 export const PageBtn = styled.button`
@@ -11,6 +12,7 @@ export const PageBtn = styled.button`
   height: 30px;
   width: 40px;
   box-shadow: 0px 0px 3px skyblue;
+  cursor: pointer;
 `;
 
 export interface IPageBtns {
@@ -90,4 +92,38 @@ export const Btn = styled.button`
   background-color: #299ecc;
   padding-right: 8px;
   color: white;
+`;
+
+export const SearchWrapper = styled.div`
+  position: fixed;
+  bottom: 800px;
+`;
+
+export const SearchInput = styled.input`
+  background-color: aliceblue;
+  padding-left: 20px;
+  height: 40px;
+  width: 400px;
+  border-radius: 15px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  border: none;
+  outline: none;
+  :hover {
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3) inset;
+  }
+`;
+
+export const SearchBtn = styled.button`
+  height: 40px;
+  width: 60px;
+  border-radius: 5px;
+  margin: 5px;
+  border: none;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+  background-color: greenyellow;
+  color: green;
+  cursor: pointer;
+  :active {
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3) inset;
+  }
 `;
