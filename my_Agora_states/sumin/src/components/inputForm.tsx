@@ -1,5 +1,6 @@
 import React, {useState , ComponentProps} from 'react';
 import styled from 'styled-components';
+import { dataList } from './dummyData';
 
 const InputSection = styled.section`
     height: 600px;
@@ -23,21 +24,6 @@ const QustionWrapper = styled.form`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    > label {
-        width: 100%;
-    }
-    > textarea {
-        background-color: white;
-        margin-top: 10px;
-        padding: 10px 15px;
-        width: 100%;
-        border-radius: 10px;
-        height: 10em;
-        resize: none;
-        box-shadow: rgba(255, 255, 255, 0.235) 2px 2px 4px 0px inset, 
-        rgba(72, 54, 46, 0.2) -2px -2px 4px 1px inset;
-        font-family:none;
-    }
     > button {
         margin-top:20px;
         padding: 10px;
@@ -72,7 +58,7 @@ function InputForm() {
     const [name, setName] = useState("");
     const [title, setTitle] = useState("");
     const [question, setQuestion] = useState("");
-    // const [submit, setSubmit] = useState("");
+    const [data, setData] = useState(dataList);
 
     const onChangeName  = (e:React.ChangeEvent<HTMLInputElement>) =>{
         setName(e.currentTarget.value)
@@ -87,24 +73,44 @@ function InputForm() {
     const onSubmitDiscussion = (e:React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault()
         const newData : NewData = {
-            id: name,
+            id: String(Date.now()),
             createdAt: JSON.stringify(new Date()),
             title: title,
             url: "https://google.com",
             author: name,
             answer: null,
             bodyHTML: question,
-            avatarUrl: 'img/icon.png',
+            avatarUrl: './icon.png',
         }
-        // setSubmit(?);
+        const updatedData = [newData, ...data];
+
+        setData(updatedData);
+
         setName('');
         setTitle('');
         setQuestion('');
+
     }
+
+    // const dataListMap = data.map(discussion => {
+    //     if (!discussion.answer){
+    //         return {
+    //             ...discussion,
+    //         }
+    //     }
+        
+    //     return{
+    //         ...discussion,
+    //         answer: {
+    //             ...discussion.answer,
+    //         }
+            
+    //     }
+    // })
 
     return (
         <>
-        <InputSection>
+        <InputSection onSubmit={onSubmitDiscussion}>
             <NameWrapper>
                 <label>✦ NAME ✦</label>
                 <input 
@@ -119,13 +125,13 @@ function InputForm() {
                 value={title}
                 onChange={onChangeTitle} />
             </TitleWrapper>
-            <QustionWrapper onSubmit={(e)=>onSubmitDiscussion(e)}>
+            <QustionWrapper>
                 <label>✦ QUESTION ✦</label>
                 <textarea 
                 placeholder= 'write question' 
                 value={question}
                 onChange={onChangeQuestion} />
-                <button>SUBMIT</button>
+                <button type='submit'>SUBMIT</button>
             </QustionWrapper>
         </InputSection>
         </>
